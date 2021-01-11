@@ -21,7 +21,6 @@
 </head>
 
 <body>
-
     <!-- NAV BAR -->
     <nav class="navbar navbar-expand-md mb-4">
         <ul class="navbar-nav">
@@ -32,29 +31,58 @@
 
         <ul class="navbar-nav ms-auto">
             <li class="nav-item">
-                <a class="nav-link" href="" data-target="#myModal" data-toggle="modal">Time Remaining: <span id="timeLeft"></span></a>
+                <a class="nav-link" href="" data-target="#myModal" data-toggle="modal">Time Remaining: <span
+                        id="timeLeft"></span></a>
             </li>
         </ul>
     </nav>
+
 
     <!-- Main Container -->
     <main class="container">
         <section class="row">
             <!-- Blank COLUMN for SPACING -->
-            <div class="col-sm-3"></div>
+            <div class="col-md-3"></div>
 
             <!-- MAIN CONTENT -->
             <div class="col-md-6">
-                <div class="card">
+
+                <!-- Welcome Page -->
+                <div class="card" id="welcomePage">
+                    <div class="card-body" id="card-body">
+                        <h2 class="card-title">Coding Quiz Challenge
+                        </h2>
+                        <p class="mt-3">Try to answer the following code-related questions within the tie limit. Keep in
+                            mind that incorrect answers will penalize your score/time by ten seconds!</p>
+                        <button id="startQuiz" type="button"
+                            class="btn btn-primary d-block m-auto btn-sm pt-0 pb-0">Start Quiz</button>
+                    </div>
+                </div>
+
+                <!-- Question Page -->
+                <div class="card" id="questionPage">
                     <div class="card-body" id="card-body">
                         <h5 id="question" class="card-title">What is the answer to life, the Universe, and everything?
                         </h5>
-                        <button id="answer1" type="button" class="btn btn-primary d-block mb-1"></button>
-                        <button id="answer2" type="button" class="btn btn-primary d-block mb-1"></button>
-                        <button id="answer3" type="button" class="btn btn-primary d-block mb-1"></button>
-                        <button id="answer4" type="button" class="btn btn-primary d-block mb-1"></button>
+                        <button id="btn_answer1" type="button" class="btn btn-sm btn-primary d-block mb-1 pt-0 pb-0">1. <span id="a1"></span></button>
+                        <button id="btn_answer2" type="button" class="btn btn-sm btn-primary d-block mb-1 pt-0 pb-0">2. <span id="a2"></span></button>
+                        <button id="btn_answer3" type="button" class="btn btn-sm btn-primary d-block mb-1 pt-0 pb-0">3. <span id="a3"></span></button>
+                        <button id="btn_answer4" type="button" class="btn btn-sm btn-primary d-block mb-1 pt-0 pb-0">4. <span id="a4"></span></button>
                     </div>
                 </div>
+
+
+                <!-- Done Page -->
+                <div class="card" id="donePage">
+                    <div class="card-body" id="card-body">
+                        <h5 id="question" class="card-title" style="font-weight: bold;">All done!
+                        </h5>
+                        <p>Your final score is <span id="finalScore"></span></p>
+                        <button id="btn_submit" type="button" class="btn btn-primary d-block mb-1">Hello</button>
+
+                    </div>
+                </div>
+
             </div>
 
             <!-- Blank COLUMN for SPACING -->
