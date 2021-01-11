@@ -1,85 +1,136 @@
 // Start Quiz on click; call startQuiz Function
 document.getElementById("startQuiz").addEventListener("click", startQuiz);
 
+// Declare Question Object, with answer pool objects to be randomized for the quiz later
+var oQuestions = [
+    {
+        question: "Color",
+        answers: [
+            { Green: true },
+            { Yellow: false },
+            { Blue: false },
+            { Red: false },
+        ],
+    },
+    {
+        question: "Number",
+        answers: [
+            { One: true },
+            { Two: false },
+            { Three: false },
+            { Four: false },
+        ],
+    },
+    {
+        question: "Food",
+        answers: [
+            { "Sushi": true },
+            { "Pizza": false },
+            { "Hamburger": false },
+            { "Raman": false },
+        ],
+    },
+    {
+        question: "Music",
+        answers: [
+            { "Seven Lions": true },
+            { "Martin Garrix": false },
+            { "David Guetta": false },
+            { "Armin Van Buuren": false },
+        ],
+    },
+    {
+        question: "Car",
+        answers: [
+            { "Supra": true },
+            { "Porche": false },
+            { "Lambo": false },
+            { "Gensis": false },
+        ],
+    },
+];
+
+// Global declarations
+var gindexer = 0;                                   //for indexing thru each question as the appropriate functions are called
+var aShuffQuestions = shuffleArray(oQuestions);     // Shuffle the questions to ensure not the same order each run
+
+// Initial tasks
+hideCard("questionPage");
+hideCard("donePage");
+
 // Main function that calls all sub functions
 function startQuiz() {
     countdown();
+    hideCard("welcomePage");
+    showCard("questionPage");
+    displayQuestion(aShuffQuestions, gindexer);     // Display current gindex question
+    var answers = displayAnswers(aShuffQuestions, gindexer);      // Display current gindex questions' answer
+    onAnswerClick(answers);
 }
 
+function onAnswerClick(array) {
+    // Event listener on any quiz button clicks
+    var userSelection = document.getElementsByClassName('qbtn');
+    for (let i = 0; i < userSelection.length; i++) {
+        (function (index) {
+            userSelection[index].addEventListener("click", function () {
+
+                console.log(getAnswerValue(array, index));
+                displayQuestion(aShuffQuestions, gindexer);
+                displayAnswers(aShuffQuestions, gindexer);      // Display current gindex questions' answer
+                if (gindexer === oQuestions.length) {
+                    console.log("Reached the end!");
+                    hideCard("questionPage")
+                    showCard("donePage");
+                }
+
+            })
+        })(i);
+    }
+}
+
+function getAnswerValue(array, index) {
+    return (Object.values(array[index]))
+
+}
+
+// Hide the element that's passed
+function hideCard(element) {
+    let card = document.getElementById(element);
+    card.style = "display: none";
+}
+
+function showCard(element) {
+    let card = document.getElementById(element);
+    card.style = "display: block";
+}
+
+// Display answers
+function displayAnswers(array, index) {
+
+    // for the question object, set the button text to the answer value
+    let aShuffAnswers = shuffleArray(array[index].answers)
+    for (let j = 0; j < aShuffAnswers.length; j++) {
+        document.getElementById("a1").textContent = (Object.keys(aShuffAnswers[0]));
+        document.getElementById("a2").textContent = (Object.keys(aShuffAnswers[1]));
+        document.getElementById("a3").textContent = (Object.keys(aShuffAnswers[2]));
+        document.getElementById("a4").textContent = (Object.keys(aShuffAnswers[3]));
+    }
+    gindexer++;
+    return aShuffAnswers; //return the array of answers on 
+}
+
+// Display question, increment question indexer
+function displayQuestion(array, index) {
+    document.getElementById("question").textContent = array[index].question;
+}
 
 function countdown() {
     var timeLeft = 300;
     var stimeLeft = document.getElementById("timeLeft");
     stimeLeft.textContent = timeLeft;
 
-    // Declare Question Object, with answer pool object to be randomized for the quiz later
-    var oQuestions = [
-        {
-            question: "Color",
-            answers: [
-                { true: 1, a: "Green" },
-                { false: 1, a: "Yellow" },
-                { false: 1, a: "Blue" },
-                { false: 1, a: "Red" },
-                { false: 1, a: "Purple" },
-            ],
-        },
-        {
-            question: "Number",
-            answers: [
-                { true: 1, a: "1" },
-                { false: 1, a: "2" },
-                { false: 1, a: "3" },
-                { false: 1, a: "4" },
-                { false: 1, a: "5" },
-            ],
-        },
-        {
-            question: "Food",
-            answers: [
-                { true: 1, a: "Sushi" },
-                { false: 1, a: "Pizza" },
-                { false: 1, a: "Hamburger" },
-                { false: 1, a: "Raman" },
-                { false: 1, a: "Fried Chicken" },
-            ],
-        },
-        {
-            question: "Music",
-            answers: [
-                { true: 1, a: "Seven Lions" },
-                { false: 1, a: "Martin Garrix" },
-                { false: 1, a: "David Guetta" },
-                { false: 1, a: "Armin Van Buuren" },
-                { false: 1, a: "Tiesto" },
-            ],
-        },
-        {
-            question: "Car",
-            answers: [
-                { true: 1, a: "Supra" },
-                { false: 1, a: "Porche" },
-                { false: 1, a: "Lambo" },
-                { false: 1, a: "Gensis" },
-                { false: 1, a: "Bugatti" },
-            ],
-        },
-    ];
-    document.getElementById("question").textContent = oQuestions[0].q1;
-    console.log(oQuestions);
-    for (let i = 0; i < oQuestions.length; i++) {
-        // document.getElementById("btn_answer1").textContent = oQuestions[0].a1[1]
-        // document.getElementById("btn_answer2").textContent = oQuestions[0].a2[1];
-        // document.getElementById("btn_answer3").textContent = oQuestions[0].a3[1];
-        // document.getElementById("btn_answer4").textContent = oQuestions[0].a4[1];
-    }
-
-
-    document.getElementById("btn_answer1").addEventListener("click", stopTime);
-
-
-
-
+    // document.getElementById("btn_answer1").addEventListener("click", stopTime);
 
     // Quiz Timer countdown
     var timeInterval = setInterval(function () {
@@ -95,56 +146,31 @@ function countdown() {
             stimeLeft.innerHTML = "";
             clearInterval(timeInterval);
         }
-
-
-
     }, 1000);
-
-
-
-
-
 
     function stopTime() {
         stimeLeft.innerHTML = "";
         clearInterval(timeInterval);
     }
+}
 
+function shuffleArray(array) {
+    for (var i = array.length - 1; i > 0; i--) {
+        var j = Math.floor(Math.random() * (i + 1));
+        var temp = array[i];
+        array[i] = array[j];
+        array[j] = temp;
+    }
+    return array
 }
 
 
 
 
-// Build the welcome page
-function buildWelcomePage() {
-    // Declare variables to be used for card manipulation
-    // let eCard = document.getElementById("card-body")
-    // let eCardChildren = document.getElementById("card-body").children;
-    // let eCardContainer = document.getElementsByClassName("card");
 
-    // // Remove card container border
-    // eCardContainer[0].style = "border: none";
-    // for (let i = 0; i < eCardChildren.length; i++) {
-    //     eCardChildren[i].style.visibility = "hidden";
-    // }
 
-    // // Create welcome page content
-    // let heading = document.createElement("H2");
-    // heading.textContent = "Coding Quiz Challenge"
-    // heading.style = "font-weight: bold; text-align: center";
-    // eCard.appendChild(heading);
 
-    // let paragraph = document.createElement("P");
-    // paragraph.textContent = "Try to answer the following code-related questions within the tie limit. Keep in mind that incorrect answers will penalize your score/time by ten seconds!"
-    // paragraph.style = "text-align: center";
-    // eCard.appendChild(paragraph);
 
-    // let btnStart = document.createElement("BUTTON");
-    // btnStart.textContent = "Start Quiz"
-    // btnStart.setAttribute("id", "startQuiz");
-    // btnStart.setAttribute("type", "button");
-    // btnStart.setAttribute("class", "btn btn-primary d-block mb-1 pt-0 pb-0 btn-sm m-auto");
-    // btnStart.setAttribute("id", "startQuiz");
-    // eCard.appendChild(btnStart);
 
-}
+
+
