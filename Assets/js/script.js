@@ -11,20 +11,72 @@ function countdown() {
     var timeLeft = 300;
     var stimeLeft = document.getElementById("timeLeft");
     stimeLeft.textContent = timeLeft;
-    
-    // Declare Questions Object with 
-    var oQuestions = [{ q1: "Sky blue?", a1: [true, "Blue"], a2: [false, "Red"], a3: [false, "Green"], a4: [false, "Yellow"] }, { q2: "Earth flat?", a: false }, { q: "Pizza good?", a: true }];
+
+    // Declare Question Object, with answer pool object to be randomized for the quiz later
+    var oQuestions = [
+        {
+            question: "Color",
+            answers: [
+                { true: 1, a: "Green" },
+                { false: 1, a: "Yellow" },
+                { false: 1, a: "Blue" },
+                { false: 1, a: "Red" },
+                { false: 1, a: "Purple" },
+            ],
+        },
+        {
+            question: "Number",
+            answers: [
+                { true: 1, a: "1" },
+                { false: 1, a: "2" },
+                { false: 1, a: "3" },
+                { false: 1, a: "4" },
+                { false: 1, a: "5" },
+            ],
+        },
+        {
+            question: "Food",
+            answers: [
+                { true: 1, a: "Sushi" },
+                { false: 1, a: "Pizza" },
+                { false: 1, a: "Hamburger" },
+                { false: 1, a: "Raman" },
+                { false: 1, a: "Fried Chicken" },
+            ],
+        },
+        {
+            question: "Music",
+            answers: [
+                { true: 1, a: "Seven Lions" },
+                { false: 1, a: "Martin Garrix" },
+                { false: 1, a: "David Guetta" },
+                { false: 1, a: "Armin Van Buuren" },
+                { false: 1, a: "Tiesto" },
+            ],
+        },
+        {
+            question: "Car",
+            answers: [
+                { true: 1, a: "Supra" },
+                { false: 1, a: "Porche" },
+                { false: 1, a: "Lambo" },
+                { false: 1, a: "Gensis" },
+                { false: 1, a: "Bugatti" },
+            ],
+        },
+    ];
     document.getElementById("question").textContent = oQuestions[0].q1;
-    console.log(oQuestions[0].a1[0]);
+    console.log(oQuestions);
     for (let i = 0; i < oQuestions.length; i++) {
-        document.getElementById("btn_answer1").textContent = oQuestions[0].a1[1];
-        document.getElementById("btn_answer2").textContent = oQuestions[0].a2[1];
-        document.getElementById("btn_answer3").textContent = oQuestions[0].a3[1];
-        document.getElementById("btn_answer4").textContent = oQuestions[0].a4[1];
+        // document.getElementById("btn_answer1").textContent = oQuestions[0].a1[1]
+        // document.getElementById("btn_answer2").textContent = oQuestions[0].a2[1];
+        // document.getElementById("btn_answer3").textContent = oQuestions[0].a3[1];
+        // document.getElementById("btn_answer4").textContent = oQuestions[0].a4[1];
     }
 
-    
-    
+
+    document.getElementById("btn_answer1").addEventListener("click", stopTime);
+
 
 
 
@@ -44,9 +96,11 @@ function countdown() {
             clearInterval(timeInterval);
         }
 
-        
+
 
     }, 1000);
+
+
 
 
 
