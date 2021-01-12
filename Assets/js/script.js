@@ -49,15 +49,8 @@ var oQuestions = [
 
 // Global declarations
 var gindexer = 0;                                   //for indexing thru each question as the appropriate functions are called
-
-console.log("======= ORIGINAL OBJ =======");
-console.log(oQuestions);
-
-console.log("======= SHUFFLED OBJ TO NEW ARRAY=======");
 var aShuffQuestions = getShuffledArray(oQuestions);     // Shuffle the questions to ensure not the same order each run
-console.log(aShuffQuestions);
-
-var answers;
+// var answers;
 
 // Initial tasks
 hideCard("questionPage");
@@ -73,18 +66,12 @@ function startQuiz() {
     showCard("questionPage");
     displayQuestion(aShuffQuestions, gindexer);     // Display current gindex question
     answers = displayAnswers(aShuffQuestions, gindexer);      // Display current gindex questions' answer
-    console.log("======= DISPLAY ANSWERS RETURNED... =======");
-    console.log(answers);
-
-
 }
 
 // Display answers
 function displayAnswers(array, index) {
     // for the question object, set the button text to the answer value
-    console.log("======= SHUFFLEDOBJARRAY.ANSWERS =======");
     currentAnswers = getShuffledArray(array[index].answers)
-    console.log(currentAnswers);
 
     document.getElementById("a1").textContent = (Object.keys(currentAnswers[0]));
     document.getElementById("a2").textContent = (Object.keys(currentAnswers[1]));
@@ -104,8 +91,6 @@ for (let i = 0; i < userSelection.length; i++) {
             getAnswerValue(answers, index);
             displayQuestion(aShuffQuestions, gindexer);
 
-            console.log("====== ABOUT TO DISPLAY ANSWERS ======");
-            console.log(answers);
             answers = displayAnswers(aShuffQuestions, gindexer);      // Display current gindex questions' answer
 
             if (gindexer === oQuestions.length) {
@@ -119,33 +104,25 @@ for (let i = 0; i < userSelection.length; i++) {
 
 
 function getAnswerValue(array, index) {
-    console.log("======= GETANSWERVALUE of... =======");
-    console.log(array);
     let j = Object.values(array[index])
     console.log("======= VALUE GOTTEN  =======");
     console.log(j);
     return j
 }
-
 // Hide the element that's passed
 function hideCard(element) {
     let card = document.getElementById(element);
     card.style = "display: none";
 }
-
 function showCard(element) {
     let card = document.getElementById(element);
     card.style = "display: block";
 }
-
 // Display question, increment question indexer
 function displayQuestion(array, index) {
     let question = array[index].question;
     document.getElementById("question").textContent = question;
-    console.log("======= GOT QUESTION  =======");
-    console.log(question);
 }
-
 function countdown() {
     var timeLeft = 300;
     var stimeLeft = document.getElementById("timeLeft");
@@ -174,7 +151,6 @@ function countdown() {
         clearInterval(timeInterval);
     }
 }
-
 function getShuffledArray(array) {
     var newArray = [];
     for (let i = 0; i < array.length; i++) {
