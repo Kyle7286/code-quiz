@@ -112,16 +112,23 @@ function startQuiz() {
 
 function displayDivResult(result) {
     var resultText = document.getElementById("resultText");
+    showCard("divResult")
     if (result === false) {
-        console.log("INSIDE WRONG DIV");
         resultText.textContent = "Wrong!"
+        setTimeout(function () {
+            hideCard("divResult")
+        }, 850)
     }
     else {
-        console.log("INSIDE RIGHT DIV");
         resultText.textContent = "Correct!"
-
+        console.log("INSIDE WRONG DIV");
+        resultText.textContent = "Correct!"
+        setTimeout(function () {
+            hideCard("divResult")
+        }, 850)
 
     }
+
 }
 
 // Subtract from time left
