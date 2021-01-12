@@ -49,10 +49,13 @@ var oQuestions = [
 
 // Global declarations
 var gindexer = 0;  //for indexing thru each question as the appropriate functions are called
-var stopTime = 0;
+var stopTime = false;
 var timeInterval;
 var answerValue;
 var stimeLeft = document.getElementById("timeLeft");
+var timeLeft = 50;
+var finalScore;
+updateTimeLeft(timeLeft);
 
 // Start Quiz on click; call startQuiz Function
 document.getElementById("startQuiz").addEventListener("click", startQuiz);
@@ -87,38 +90,49 @@ function startQuiz() {
 
         // If answer selected is false... subtract time
         if (value === false) {
-            subtractTime(timeLeft)
+            subtractTime(timeLeft);
+            console.log(value);
+            displayDivResult(value);
+        }
+        else {
+            displayDivResult(value);
         }
 
         // If the final question is answered then perform some functions and proceed to donePage
         if (gindexer === oQuestions.length) {
             console.log("Reached the end!");
-            stopTime();
+            clearInterval(timeInterval);
             hideCard("questionPage");
             showCard("donePage");
         }
-
-
-    }
-
-    // Subtract from time left
-    function subtractTime(currentTimeLeft) {
-        console.log("SUBTRACTING");
-        timeLeft = (currentTimeLeft - 10);
-        updateTimeLeft(timeLeft);
-    }
-
-    // Stop timer
-    function stopTime() {
-        clearInterval(timeInterval);
-        console.log(stopTime);
-    }
-
-    function updateTimeLeft(currentTimeLeft) {
-        stimeLeft.textContent = currentTimeLeft;
     }
 
 
+}
+
+function displayDivResult(result) {
+    var resultText = document.getElementById("resultText");
+    if (result === false) {
+        console.log("INSIDE WRONG DIV");
+        resultText.textContent = "Wrong!"
+    }
+    else {
+        console.log("INSIDE RIGHT DIV");
+        resultText.textContent = "Correct!"
+
+
+    }
+}
+
+// Subtract from time left
+function subtractTime(currentTimeLeft) {
+    timeLeft = (currentTimeLeft - 10);
+    stimeLeft.textContent = timeLeft;
+}
+
+
+function updateTimeLeft(currentTimeLeft) {
+    stimeLeft.textContent = currentTimeLeft;
 }
 
 // Display answers
@@ -158,26 +172,24 @@ function displayQuestion(array, index) {
 }
 
 
-var timeLeft = 75;
+
 // Quiz Timer countdown
 function countdown() {
+    // stimeLeft.textContent = timeLeft--;
 
-    stimeLeft.textContent = timeLeft;
 
     timeInterval = setInterval(function () {
-        console.log(timeLeft);
 
-        if (timeLeft === 1) {
-            stimeLeft.innerHTML = (timeLeft--) + " second left";
-        }
-        else if (timeLeft > 0) {
-            stimeLeft.innerHTML = (timeLeft--) + " seconds left";
+        // stimeLeft.innerHTML = timeLeft;
+
+        if (timeLeft <= 0) {
+            stimeLeft.innerHTML = (timeLeft--);
+            alert("OMG YOUR RAN OUT OF TIME!!!!!");
+            clearInterval(timeInterval)
         }
         else {
-            stimeLeft.innerHTML = "";
-            clearInterval(timeInterval);
+            stimeLeft.innerHTML = (timeLeft--);
         }
-
 
     }, 1000);
 }
