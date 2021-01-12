@@ -1,6 +1,3 @@
-// Start Quiz on click; call startQuiz Function
-document.getElementById("startQuiz").addEventListener("click", startQuiz);
-
 // Declare Question Object, with answer pool objects to be randomized for the quiz later
 var oQuestions = [
     {
@@ -52,11 +49,22 @@ var oQuestions = [
 
 // Global declarations
 var gindexer = 0;                                   //for indexing thru each question as the appropriate functions are called
-var aShuffQuestions = shuffleArray(oQuestions);     // Shuffle the questions to ensure not the same order each run
+
+console.log("======= ORIGINAL OBJ =======");
+console.log(oQuestions);
+
+console.log("======= SHUFFLED OBJ TO NEW ARRAY=======");
+var aShuffQuestions = getShuffledArray(oQuestions);     // Shuffle the questions to ensure not the same order each run
+console.log(aShuffQuestions);
+
+var answers;
 
 // Initial tasks
 hideCard("questionPage");
 hideCard("donePage");
+
+// Start Quiz on click; call startQuiz Function
+document.getElementById("startQuiz").addEventListener("click", startQuiz);
 
 // Main function that calls all sub functions
 function startQuiz() {
@@ -64,34 +72,59 @@ function startQuiz() {
     hideCard("welcomePage");
     showCard("questionPage");
     displayQuestion(aShuffQuestions, gindexer);     // Display current gindex question
-    var answers = displayAnswers(aShuffQuestions, gindexer);      // Display current gindex questions' answer
-    onAnswerClick(answers);
+    answers = displayAnswers(aShuffQuestions, gindexer);      // Display current gindex questions' answer
+    console.log("======= DISPLAY ANSWERS RETURNED... =======");
+    console.log(answers);
+
+
 }
 
-function onAnswerClick(array) {
-    // Event listener on any quiz button clicks
-    var userSelection = document.getElementsByClassName('qbtn');
-    for (let i = 0; i < userSelection.length; i++) {
-        (function (index) {
-            userSelection[index].addEventListener("click", function () {
+// Display answers
+function displayAnswers(array, index) {
+    // for the question object, set the button text to the answer value
+    console.log("======= SHUFFLEDOBJARRAY.ANSWERS =======");
+    currentAnswers = getShuffledArray(array[index].answers)
+    console.log(currentAnswers);
 
-                console.log(getAnswerValue(array, index));
-                displayQuestion(aShuffQuestions, gindexer);
-                displayAnswers(aShuffQuestions, gindexer);      // Display current gindex questions' answer
-                if (gindexer === oQuestions.length) {
-                    console.log("Reached the end!");
-                    hideCard("questionPage")
-                    showCard("donePage");
-                }
+    document.getElementById("a1").textContent = (Object.keys(currentAnswers[0]));
+    document.getElementById("a2").textContent = (Object.keys(currentAnswers[1]));
+    document.getElementById("a3").textContent = (Object.keys(currentAnswers[2]));
+    document.getElementById("a4").textContent = (Object.keys(currentAnswers[3]));
 
-            })
-        })(i);
-    }
+    gindexer++;
+
+    return currentAnswers; //return the array of answers on 
 }
+
+// Event listener on any quiz button clicks
+var userSelection = document.getElementsByClassName('qbtn');
+for (let i = 0; i < userSelection.length; i++) {
+    (function (index) {
+        userSelection[index].addEventListener("click", function () {
+            getAnswerValue(answers, index);
+            displayQuestion(aShuffQuestions, gindexer);
+
+            console.log("====== ABOUT TO DISPLAY ANSWERS ======");
+            console.log(answers);
+            answers = displayAnswers(aShuffQuestions, gindexer);      // Display current gindex questions' answer
+
+            if (gindexer === oQuestions.length) {
+                console.log("Reached the end!");
+                hideCard("questionPage")
+                showCard("donePage");
+            }
+        })
+    })(i);
+}
+
 
 function getAnswerValue(array, index) {
-    return (Object.values(array[index]))
-
+    console.log("======= GETANSWERVALUE of... =======");
+    console.log(array);
+    let j = Object.values(array[index])
+    console.log("======= VALUE GOTTEN  =======");
+    console.log(j);
+    return j
 }
 
 // Hide the element that's passed
@@ -105,24 +138,12 @@ function showCard(element) {
     card.style = "display: block";
 }
 
-// Display answers
-function displayAnswers(array, index) {
-
-    // for the question object, set the button text to the answer value
-    let aShuffAnswers = shuffleArray(array[index].answers)
-    for (let j = 0; j < aShuffAnswers.length; j++) {
-        document.getElementById("a1").textContent = (Object.keys(aShuffAnswers[0]));
-        document.getElementById("a2").textContent = (Object.keys(aShuffAnswers[1]));
-        document.getElementById("a3").textContent = (Object.keys(aShuffAnswers[2]));
-        document.getElementById("a4").textContent = (Object.keys(aShuffAnswers[3]));
-    }
-    gindexer++;
-    return aShuffAnswers; //return the array of answers on 
-}
-
 // Display question, increment question indexer
 function displayQuestion(array, index) {
-    document.getElementById("question").textContent = array[index].question;
+    let question = array[index].question;
+    document.getElementById("question").textContent = question;
+    console.log("======= GOT QUESTION  =======");
+    console.log(question);
 }
 
 function countdown() {
@@ -154,23 +175,21 @@ function countdown() {
     }
 }
 
-function shuffleArray(array) {
-    for (var i = array.length - 1; i > 0; i--) {
-        var j = Math.floor(Math.random() * (i + 1));
-        var temp = array[i];
-        array[i] = array[j];
-        array[j] = temp;
+function getShuffledArray(array) {
+    var newArray = [];
+    for (let i = 0; i < array.length; i++) {
+        newArray.push(array[i]);
     }
-    return array
+
+    for (var i = newArray.length - 1; i > 0; i--) {
+        var j = Math.floor(Math.random() * (i + 1));
+        var temp = newArray[i];
+        newArray[i] = newArray[j];
+        newArray[j] = temp;
+    }
+
+    return newArray
 }
-
-
-
-
-
-
-
-
 
 
 

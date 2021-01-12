@@ -32,3 +32,8 @@
 1. Enter first page
     1. BODY
     2. MAIN CONTENT
+
+## Build Question Logic
+    0. Start Quiz 
+    1. Assign shuffled array to a variable
+    2. 
