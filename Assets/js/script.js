@@ -51,6 +51,8 @@ var oQuestions = [
 var gindexer = 0;  //for indexing thru each question as the appropriate functions are called
 var stopTime = 0;
 var timeInterval;
+var answerValue;
+var stimeLeft = document.getElementById("timeLeft");
 
 // Start Quiz on click; call startQuiz Function
 document.getElementById("startQuiz").addEventListener("click", startQuiz);
@@ -64,6 +66,57 @@ function startQuiz() {
     selectAnswer()
     displayQuestion(aShuffQuestions, gindexer);     // Display current gindex question
     answers = displayAnswers(aShuffQuestions, gindexer);      // Display current gindex questions' answer
+
+
+    // Add event listeners for the buttons once quiz starts
+    function selectAnswer() {
+        document.querySelectorAll('.qbtn').forEach(item => {
+            item.addEventListener('click', event => {
+                //handle click
+                answerSelected(item.getAttribute("data-array"))
+            })
+        })
+    }
+
+    // Handle the answer selections
+    function answerSelected(buttonValue) {
+        console.log("Passed answerSelected(): " + buttonValue);
+        var value = getAnswerValue(answers, buttonValue);
+        displayQuestion(aShuffQuestions, gindexer);
+        answers = displayAnswers(aShuffQuestions, gindexer);      // Display current gindex questions' answer
+
+        // If answer selected is false... subtract time
+        if (value === false) {
+            subtractTime(timeLeft)
+        }
+
+        // If the final question is answered then perform some functions and proceed to donePage
+        if (gindexer === oQuestions.length) {
+            console.log("Reached the end!");
+            stopTime();
+            hideCard("questionPage");
+            showCard("donePage");
+        }
+
+
+    }
+
+    // Subtract from time left
+    function subtractTime(currentTimeLeft) {
+        console.log("SUBTRACTING");
+        timeLeft = (currentTimeLeft - 10);
+        updateTimeLeft(timeLeft);
+    }
+
+    // Stop timer
+    function stopTime() {
+        clearInterval(timeInterval);
+        console.log(stopTime);
+    }
+
+    function updateTimeLeft(currentTimeLeft) {
+        stimeLeft.textContent = currentTimeLeft;
+    }
 
 
 }
@@ -82,39 +135,9 @@ function displayAnswers(array, index) {
 
     return currentAnswers; //return the array of answers on 
 }
-
-// Add event listeners for the buttons once quiz starts
-function selectAnswer() {
-    // Event listener on any quiz button clicks
-    var userSelection = document.getElementsByClassName('qbtn');
-    for (let i = 0; i < userSelection.length; i++) {
-        (function (index) {
-            userSelection[index].addEventListener("click", function () {
-
-                getAnswerValue(answers, index);
-                displayQuestion(aShuffQuestions, gindexer);
-                answers = displayAnswers(aShuffQuestions, gindexer);      // Display current gindex questions' answer
-
-                if (gindexer === oQuestions.length) {
-                    console.log("Reached the end!");
-                    stopTime();
-                    hideCard("questionPage");
-                    showCard("donePage");
-                }
-            })
-        })(i);
-    }
-
-}
-
-function stopTime() {
-    clearInterval(timeInterval);
-    console.log(stopTime);
-}
-
 // Get the value of the button clicked (true or false)
 function getAnswerValue(array, index) {
-    let j = Object.values(array[index])
+    let j = Object.values(array[index])[0]
     console.log(j);
     return j
 }
@@ -134,18 +157,15 @@ function displayQuestion(array, index) {
     document.getElementById("question").textContent = question;
 }
 
+
+var timeLeft = 75;
 // Quiz Timer countdown
 function countdown() {
-    var timeLeft = 75;
-    var stimeLeft = document.getElementById("timeLeft");
+
     stimeLeft.textContent = timeLeft;
 
-    var timeInterval = setInterval(function () {
-        console.log(stopTime);
-        if (stopTime === "1") {
-            console.log("ENTERED STOPTIME");
-            clearInterval(timeInterval);
-        }
+    timeInterval = setInterval(function () {
+        console.log(timeLeft);
 
         if (timeLeft === 1) {
             stimeLeft.innerHTML = (timeLeft--) + " second left";
@@ -157,6 +177,8 @@ function countdown() {
             stimeLeft.innerHTML = "";
             clearInterval(timeInterval);
         }
+
+
     }, 1000);
 }
 

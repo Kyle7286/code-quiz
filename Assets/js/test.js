@@ -1,115 +1,50 @@
-var oQuestions = [
-    {
-        question: "Color",
-        answers: [
-            { Green: true },
-            { Yellow: false },
-            { Blue: false },
-            { Red: false },
-        ],
-    },
-    {
-        question: "Number",
-        answers: [
-            { One: true },
-            { Two: false },
-            { Three: false },
-            { Four: false },
-        ],
-    },
-    {
-        question: "Food",
-        answers: [
-            { "Sushi": true },
-            { "Pizza": false },
-            { "Hamburger": false },
-            { "Raman": false },
-        ],
-    },
-    {
-        question: "Music",
-        answers: [
-            { "Seven Lions": true },
-            { "Martin Garrix": false },
-            { "David Guetta": false },
-            { "Armin Van Buuren": false },
-        ],
-    },
-    {
-        question: "Car",
-        answers: [
-            { "Supra": true },
-            { "Porche": false },
-            { "Lambo": false },
-            { "Gensis": false },
-        ],
-    },
-];
+var timeInterval;
 
-var globalIndexer = 0;
+var qCard = document.getElementById("questionPage");
+qCard.style = "display: block";
 
-console.log("======= ORIGINAL OBJ =======");
-console.log(oQuestions);
+var btn_StartQuiz = document.getElementById("startQuiz");
+btn_StartQuiz.addEventListener("click", startQuiz);
+countdown(timeInterval);
 
-
-console.log("======= PLAIN SHUFFLE OBJ =======");
-console.log(shuffle(oQuestions));
-
-
-
-
-
-
-
-console.log("======= SHUFFLED ARRAY =======");
-var shuffledQuestions = getShuffledArray(oQuestions);
-console.log(shuffledQuestions);
-
-
-console.log("======= newARRAY.ANSWERS  =======");
-console.log(shuffledQuestions[globalIndexer].answers);
-
-console.log("======= SHUFFLED ANSWERS  =======");
-var shuffledAnswers = getShuffledArray(shuffledQuestions[globalIndexer].answers)
-console.log(shuffledAnswers);
-
-
-console.log("======= ANSWERS LISTED =======");
-console.log((Object.keys(shuffledAnswers[0])[0]));
-console.log((Object.keys(shuffledAnswers[1])[0]));
-console.log((Object.keys(shuffledAnswers[2])[0]));
-console.log((Object.keys(shuffledAnswers[3])[0]));
-
-
-
-function getShuffledArray(array) {
-    var newArray = [];
-    for (let i = 0; i < array.length; i++) {
-        newArray.push(array[i]);
-    }
-
-    for (var i = newArray.length - 1; i > 0; i--) {
-        var j = Math.floor(Math.random() * (i + 1));
-        var temp = newArray[i];
-        newArray[i] = newArray[j];
-        newArray[j] = temp;
-    }
-
-    return newArray
-}
-
-function shuffle(array) {
-
-    for (var i = array.length - 1; i > 0; i--) {
-        var j = Math.floor(Math.random() * (i + 1));
-        var temp = array[i];
-        array[i] = array[j];
-        array[j] = temp;
-    }
-
-    return array
+function startQuiz() {
+    clearInterval(timeInterval);
+    console.log("Cleared time interval");
 }
 
 
+var userSelection = document.getElementsByClassName('qbtn');
+for (let i = 0; i < userSelection.length; i++) {
+    (function (index) {
+        userSelection[index].addEventListener("click", function () {
+
+            
 
 
+        })
+    })(i);
+}
+
+
+// Quiz Timer countdown
+function countdown() {
+    var timeLeft = 75;
+    var stimeLeft = document.getElementById("timeLeft");
+    stimeLeft.textContent = timeLeft;
+
+    timeInterval = setInterval(function () {
+
+
+        if (timeLeft === 1) {
+            stimeLeft.innerHTML = (timeLeft--) + " second left";
+        }
+        else if (timeLeft > 0) {
+            stimeLeft.innerHTML = (timeLeft--) + " seconds left";
+        }
+        else {
+            stimeLeft.innerHTML = "";
+            clearInterval(timeInterval);
+        }
+
+    }, 1000);
+}
