@@ -1,7 +1,7 @@
 // Declare Question Object, with answer pool objects to be randomized for the quiz later
 var oQuestions = [
     {
-        question: "Color",
+        question: "Color?",
         answers: [
             { Green: true },
             { Yellow: false },
@@ -10,7 +10,7 @@ var oQuestions = [
         ],
     },
     {
-        question: "Number",
+        question: "Number?",
         answers: [
             { One: true },
             { Two: false },
@@ -19,7 +19,7 @@ var oQuestions = [
         ],
     },
     {
-        question: "Food",
+        question: "Food?",
         answers: [
             { "Sushi": true },
             { "Pizza": false },
@@ -28,7 +28,7 @@ var oQuestions = [
         ],
     },
     {
-        question: "Music",
+        question: "Music?",
         answers: [
             { "Seven Lions": true },
             { "Martin Garrix": false },
@@ -37,7 +37,7 @@ var oQuestions = [
         ],
     },
     {
-        question: "Car",
+        question: "Car?",
         answers: [
             { "Supra": true },
             { "Porche": false },
@@ -48,24 +48,24 @@ var oQuestions = [
 ];
 
 // Global declarations
-var gindexer = 0;                                   //for indexing thru each question as the appropriate functions are called
-var aShuffQuestions = getShuffledArray(oQuestions);     // Shuffle the questions to ensure not the same order each run
-// var answers;
-
-// Initial tasks
-hideCard("questionPage");
-hideCard("donePage");
+var gindexer = 0;  //for indexing thru each question as the appropriate functions are called
+var stopTime = 0;
+var timeInterval;
 
 // Start Quiz on click; call startQuiz Function
 document.getElementById("startQuiz").addEventListener("click", startQuiz);
 
 // Main function that calls all sub functions
 function startQuiz() {
+    aShuffQuestions = getShuffledArray(oQuestions);     // Shuffle the questions to ensure not the same order each run, returns a new array.
     countdown();
     hideCard("welcomePage");
     showCard("questionPage");
+    selectAnswer()
     displayQuestion(aShuffQuestions, gindexer);     // Display current gindex question
     answers = displayAnswers(aShuffQuestions, gindexer);      // Display current gindex questions' answer
+
+
 }
 
 // Display answers
@@ -83,29 +83,38 @@ function displayAnswers(array, index) {
     return currentAnswers; //return the array of answers on 
 }
 
-// Event listener on any quiz button clicks
-var userSelection = document.getElementsByClassName('qbtn');
-for (let i = 0; i < userSelection.length; i++) {
-    (function (index) {
-        userSelection[index].addEventListener("click", function () {
-            getAnswerValue(answers, index);
-            displayQuestion(aShuffQuestions, gindexer);
+// Add event listeners for the buttons once quiz starts
+function selectAnswer() {
+    // Event listener on any quiz button clicks
+    var userSelection = document.getElementsByClassName('qbtn');
+    for (let i = 0; i < userSelection.length; i++) {
+        (function (index) {
+            userSelection[index].addEventListener("click", function () {
 
-            answers = displayAnswers(aShuffQuestions, gindexer);      // Display current gindex questions' answer
+                getAnswerValue(answers, index);
+                displayQuestion(aShuffQuestions, gindexer);
+                answers = displayAnswers(aShuffQuestions, gindexer);      // Display current gindex questions' answer
 
-            if (gindexer === oQuestions.length) {
-                console.log("Reached the end!");
-                hideCard("questionPage")
-                showCard("donePage");
-            }
-        })
-    })(i);
+                if (gindexer === oQuestions.length) {
+                    console.log("Reached the end!");
+                    stopTime();
+                    hideCard("questionPage");
+                    showCard("donePage");
+                }
+            })
+        })(i);
+    }
+
 }
 
+function stopTime() {
+    clearInterval(timeInterval);
+    console.log(stopTime);
+}
 
+// Get the value of the button clicked (true or false)
 function getAnswerValue(array, index) {
     let j = Object.values(array[index])
-    console.log("======= VALUE GOTTEN  =======");
     console.log(j);
     return j
 }
@@ -114,6 +123,7 @@ function hideCard(element) {
     let card = document.getElementById(element);
     card.style = "display: none";
 }
+// Show the element that's passed
 function showCard(element) {
     let card = document.getElementById(element);
     card.style = "display: block";
@@ -123,16 +133,19 @@ function displayQuestion(array, index) {
     let question = array[index].question;
     document.getElementById("question").textContent = question;
 }
+
+// Quiz Timer countdown
 function countdown() {
-    var timeLeft = 300;
+    var timeLeft = 75;
     var stimeLeft = document.getElementById("timeLeft");
     stimeLeft.textContent = timeLeft;
 
-    // document.getElementById("btn_answer1").addEventListener("click", stopTime);
-
-    // Quiz Timer countdown
     var timeInterval = setInterval(function () {
-
+        console.log(stopTime);
+        if (stopTime === "1") {
+            console.log("ENTERED STOPTIME");
+            clearInterval(timeInterval);
+        }
 
         if (timeLeft === 1) {
             stimeLeft.innerHTML = (timeLeft--) + " second left";
@@ -145,12 +158,10 @@ function countdown() {
             clearInterval(timeInterval);
         }
     }, 1000);
-
-    function stopTime() {
-        stimeLeft.innerHTML = "";
-        clearInterval(timeInterval);
-    }
 }
+
+
+
 function getShuffledArray(array) {
     var newArray = [];
     for (let i = 0; i < array.length; i++) {

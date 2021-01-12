@@ -6,3 +6,6 @@
     border-style: none;
 }
 
+#questionPage, #donePage {
+    display: none;
+}

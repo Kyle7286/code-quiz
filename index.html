@@ -31,7 +31,7 @@
 
         <ul class="navbar-nav ms-auto">
             <li class="nav-item">
-                <a class="nav-link" href="" data-target="#myModal" data-toggle="modal">Time Remaining: <span
+                <a class="nav-link disabled" href="" data-target="#myModal" data-toggle="modal">Time Remaining: <span
                         id="timeLeft"></span></a>
             </li>
         </ul>
@@ -62,8 +62,8 @@
                 <!-- Question Page -->
                 <div class="card" id="questionPage">
                     <div class="card-body" id="card-body">
-                        <h5 class="card-title"><span id="question">Question goes here!</span>?
-                        </h5>
+                        <h2 class="card-title"><span id="question">Question goes here!</span>
+                        </h2>
                         <button id="btn_answer1" type="button"
                             class="btn btn-sm btn-primary d-block mb-1 pt-0 pb-0 qbtn">1.
                             <span id="a1"></span></button>
@@ -86,10 +86,16 @@
                         <h5 id="question" class="card-title" style="font-weight: bold;">All done!
                         </h5>
                         <p>Your final score is <span id="finalScore"></span></p>
-                        <button id="btn_submit" type="button" class="btn btn-primary d-block mb-1">Hello</button>
+                        <p>Enter initials:</p>
+                        <input class="form-text" placeholder="" id="txtbox_Initials" />
+                        <button id="submit" class="btn d-block mb-1 btn-sm btn-primary">Submit</button>
 
                     </div>
                 </div>
+
+
+
+
 
             </div>
 
