@@ -49,9 +49,10 @@
                 <!-- Done Page -->
                 <div class="card" id="highscoreCard">
                     <div class="card-body" id="card-body">
-                        <h5 class="card-title" style="font-weight: bold;">Highscores
+                        <h5 class="card-title text-center mb-3" style="font-weight: bold;">Highscores
                         </h5>
 
+                        <!-- Insert highscores via JS -->
                         <table class="table table-primary mb-4">
                             <thead>
                                 <tr>
@@ -61,14 +62,15 @@
                             </thead>
                             <tbody id="tBody">
                             </tbody>
-
-
                         </table>
+                        <div class="d-grid gap-2 d-flex">
+                            <button id="btnGoBack" type="button" class="btn d-block mb-1 btn-sm btn-primary">Go
+                                Back</button>
+                            <button id="btnClear" type="button"
+                                class="btn d-block mb-1 btn-sm btn-primary ms-auto">Clear
+                                Highscores</button>
+                        </div>
 
-
-                        <button id="btnGoBack" class="btn d-block mb-1 btn-sm btn-primary">Go Back</button>
-                        <button id="btnClear" class="btn d-block mb-1 btn-sm btn-primary">Clear
-                            Highscores</button>
 
                     </div>
                 </div>

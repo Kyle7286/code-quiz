@@ -1,4 +1,4 @@
-// Hide the navbar
+// Hide the navbar; inluding only for the spacing from prior page
 var navvy = document.getElementById("navvy");
 navvy.style.visibility = "hidden"
 
@@ -49,8 +49,8 @@ goBack.addEventListener("click", function () {
 // Clear high scores if clicked
 var clear = document.getElementById("btnClear")
 clear.addEventListener("click", function () {
-    localStorage.clear();
     clearAllTableRows()
+    localStorage.clear();
 });
 
 // Remove all table child elements

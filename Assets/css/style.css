@@ -2,10 +2,11 @@
     text-align: center; 
 }
 
-#welcomePage, #donePage, #questionPage {
+#welcomePage, #donePage, #questionPage, #highscoreCard {
     border-style: none;
 }
 
 #questionPage, #donePage, #divResult {
     display: none;
 }
+
