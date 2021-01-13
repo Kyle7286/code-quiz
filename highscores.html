@@ -15,7 +15,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"
         defer></script>
-    <script src="./Assets/js/script.js" defer></script>
+    <!-- <script src="./Assets/js/script.js" defer></script> -->
     <script src="./Assets/js/highscores.js" defer></script>
 
     <title>High Scores</title>
@@ -51,8 +51,23 @@
                     <div class="card-body" id="card-body">
                         <h5 class="card-title" style="font-weight: bold;">Highscores
                         </h5>
+
+                        <table class="table table-primary mb-4">
+                            <thead>
+                                <tr>
+                                    <th scope="col">User</th>
+                                    <th scope="col">Score</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tBody">
+                            </tbody>
+
+
+                        </table>
+
+
                         <button id="btnGoBack" class="btn d-block mb-1 btn-sm btn-primary">Go Back</button>
-                        <button id="btnClear Highscores" class="btn d-block mb-1 btn-sm btn-primary">Clear
+                        <button id="btnClear" class="btn d-block mb-1 btn-sm btn-primary">Clear
                             Highscores</button>
 
                     </div>

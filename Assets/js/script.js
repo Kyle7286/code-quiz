@@ -109,11 +109,8 @@ function startQuiz() {
             clearInterval(timeInterval);
             hideCard("questionPage");
             donePage();
-
         }
     }
-
-
 }
 
 function donePage() {
@@ -181,13 +178,6 @@ function donePage() {
             storageArray = JSON.parse(localStorage.getItem("scores"));
             return storageArray;
         }
-    }
-
-
-    function highScorePage() {
-
-        var nvNavBar = document.getElementById("navvy");
-        nvNavBar.style = "display: none";
     }
 
 
