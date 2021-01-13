@@ -25,14 +25,14 @@
     <!-- NAV BAR -->
     <nav class="navbar navbar-expand-md mb-4">
         <ul class="navbar-nav">
-            <li class="nav-item active">
-                <a class="nav-link" href="highscores.html">View Highscores</a>
+            <li class="nav-item">
+                <a id="linkhighScore" class="nav-link" href="highscores.html">View Highscores</a>
             </li>
         </ul>
 
         <ul class="navbar-nav ms-auto">
             <li class="nav-item">
-                <a class="nav-link" href="" data-target="#myModal" data-toggle="modal">Time Remaining: <span
+                <a class="nav-link disabled" href="" data-target="#myModal" data-toggle="modal">Time Remaining: <span
                         id="timeLeft"></span></a>
             </li>
         </ul>
@@ -53,7 +53,8 @@
                     <div class="card-body" id="card-body">
                         <h2 class="card-title">Coding Quiz Challenge
                         </h2>
-                        <p class="mt-3">Try to answer the following code-related questions within the tie limit. Keep in
+                        <p class="mt-3">Try to answer the following code-related questions within the time limit. Keep
+                            in
                             mind that incorrect answers will penalize your score/time by ten seconds!</p>
                         <button id="startQuiz" type="button"
                             class="btn btn-primary d-block m-auto btn-sm pt-0 pb-0">Start Quiz</button>
@@ -63,56 +64,37 @@
                 <!-- Question Page -->
                 <div class="card" id="questionPage">
                     <div class="card-body" id="card-body">
-                        <h5 class="card-title"><span id="question">Question goes here!</span>?
-                        </h5>
-                        <button id="btn_answer1" type="button"
+                        <h2 class="card-title"><span id="question">Question goes here!</span>
+                        </h2>
+                        <button data-array="0" id="btn_answer1" type="button"
                             class="btn btn-sm btn-primary d-block mb-1 pt-0 pb-0 qbtn">1.
                             <span id="a1"></span></button>
-                        <button id="btn_answer2" type="button"
+                        <button data-array="1" id="btn_answer2" type="button"
                             class="btn btn-sm btn-primary d-block mb-1 pt-0 pb-0 qbtn">2.
                             <span id="a2"></span></button>
-                        <button id="btn_answer3" type="button"
+                        <button data-array="2" id="btn_answer3" type="button"
                             class="btn btn-sm btn-primary d-block mb-1 pt-0 pb-0 qbtn">3.
                             <span id="a3"></span></button>
-                        <button id="btn_answer4" type="button"
+                        <button data-array="3" id="btn_answer4" type="button"
                             class="btn btn-sm btn-primary d-block mb-1 pt-0 pb-0 qbtn">4.
                             <span id="a4"></span></button>
                     </div>
-
-                    <div id="divResult">
-                        <hr class="text-muted">
-                        <p class="card-subtitle text-muted mb-2 ms-0">Result</p>
-                    </div>
-
                 </div>
 
-
                 <!-- Done Page -->
-                <div class="card" id="donePage">
+                <card class="card" id="donePage">
                     <div class="card-body" id="card-body">
                         <h5 id="question" class="card-title" style="font-weight: bold;">All done!
                         </h5>
                         <p>Your final score is <span id="finalScore"></span></p>
-                        <button id="btn_submit" type="button" class="btn btn-primary d-block mb-1">Hello</button>
 
-                    </div>
-                </div>
-
-
-                <!-- Done Page -->
-                <div class="form" id="testPage">
-                    <div class="card-body" id="card-body">
-                        <h5 id="question" class="card-title" style="font-weight: bold;">All done!
-                        </h5>
-                        <p>Your final score is <span id="finalScore"></span></p>
-                        <form class="row align-items-center m">
+                        <!-- Enter initials and submit form -->
+                        <form class="row align-items-center">
                             <div class="col-auto">
                                 <span class="">Enter initials:</span>
                             </div>
-
                             <div class="col-auto">
-                                <input type="text" class="form-control input-sm" id="txtbox_Initials"
-                                    placeholder="Jane Doe">
+                                <input type="text" class="form-control form-control-sm" id="txtbox_Initials">
                             </div>
                             <div class="col-auto">
                                 <button type="" id="btnSubmit" class="btn d-block mb-1 btn-sm btn-primary"
@@ -120,27 +102,32 @@
                             </div>
                         </form>
                     </div>
+                </card>
 
-                    form>
-                    <div class="form-group">
-                        <label for="inputsm">Small input</label>
-                        <input class="form-control form-control-sm" id="inputsm" type="text">
-                    </div>
-                    <div class="form-group">
-                        <label for="inputdefault">Default input</label>
-                        <input class="form-control" id="inputdefault" type="text">
-                    </div>
-                    <div class="form-group">
-                        <label for="inputlg">Large input</label>
-                        <input class="form-control input-lg" id="inputlg" type="text">
-                    </div>
-                    </form>
-
-
+                <div id="divResult">
+                    <hr class=" text-muted">
+                    <p class="card-subtitle text-muted mb-2 ms-0" id="resultText">Result</p>
+                </div>
+                <div id="whatever">
+                    <hr class=" text-muted">
+                    <p class="card-subtitle text-muted mb-2 ms-0" id="rtext">WHATEVER</p>
                 </div>
 
 
+
+
+
+
+
+
             </div>
+
+
+
+
+
+
+
 
 
             <!-- Blank COLUMN for SPACING -->

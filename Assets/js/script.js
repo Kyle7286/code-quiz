@@ -186,8 +186,10 @@ function donePage() {
 }
 // Display Right or Wrong div based on value selected; timed
 function displayDivResult(result) {
-    var resultText = document.getElementById("resultText");
+    console.log("ENTER DIV RESULT FUNCDTION")
+    var resultText = document.getElementById("divResult");
     showCard("divResult")
+
     if (result === false) {
         resultText.textContent = "Wrong!"
         setTimeout(function () {
@@ -244,6 +246,7 @@ function hideCard(element) {
 function showCard(element) {
     let card = document.getElementById(element);
     card.style = "display: block";
+    console.log(document.getElementById("divResult"));
 }
 // Display question, increment question indexer
 function displayQuestion(array, index) {
