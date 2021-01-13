@@ -81,25 +81,38 @@
 
                 </div>
 
-
-
                 <!-- Done Page -->
                 <div class="card" id="donePage">
                     <div class="card-body" id="card-body">
                         <h5 id="question" class="card-title" style="font-weight: bold;">All done!
                         </h5>
                         <p>Your final score is <span id="finalScore"></span></p>
-                        <p>Enter initials:</p>
-                        <input class="form-text" id="txtbox_Initials" placeholder=""  />
-                        <button id="btnSubmit" class="btn d-block mb-1 btn-sm btn-primary">Submit</button>
-
                     </div>
+
+
+                    <!-- Enter initials and submit form -->
+                    <form class="row align-items-center">
+                        <div class="col-auto">
+                            <span class="">Enter initials:</span>
+                        </div>
+
+                        <div class="col-auto">
+                            <input type="text" class="form-control input-sm" id="txtbox_Initials"
+                                placeholder="Jane Doe">
+                        </div>
+                        <div class="col-auto">
+                            <button type="" id="btnSubmit" class="btn d-block mb-1 btn-sm btn-primary"
+                                type="submit">Submit</button>
+                        </div>
+                    </form>
                 </div>
 
                 <div id="divResult">
                     <hr class=" text-muted">
                     <p class="card-subtitle text-muted mb-2 ms-0" id="resultText">Result</p>
                 </div>
+
+
 
 
 

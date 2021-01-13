@@ -126,10 +126,12 @@ function donePage() {
     showCard("donePage");
 
     // When user clicks on submit, record highscore and initials
-    btnSubmit.addEventListener("click", function () {
+    btnSubmit.addEventListener("click", function (event) {
+        event.preventDefault();
+
         var initials = txtInitials.value;
         if (initials === "") {
-            alert("Please enter you initials...\nI promise no one will judge you 😇")
+            alert("Please enter your initials...\nPromise no one will judge you 😇")
         }
         else if (initials.length < 2) {
             alert("Please enter at least 2 characters...")
