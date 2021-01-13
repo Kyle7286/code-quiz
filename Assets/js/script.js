@@ -57,9 +57,12 @@ var lHighScores = document.getElementById("linkhighScore");
 var timeLeft = 50;
 var finalScore;
 updateTimeLeft(timeLeft);
+var scores = [];
 
 // Start Quiz on click; call startQuiz Function
-document.getElementById("startQuiz").addEventListener("click", startQuiz);
+if (document.getElementById("startQuiz")) {
+    document.getElementById("startQuiz").addEventListener("click", startQuiz);
+}
 
 // Main function that calls all sub functions
 function startQuiz() {
@@ -114,37 +117,82 @@ function startQuiz() {
 }
 
 function donePage() {
+    // Grab the elements needed to work with
     var finalScore = document.getElementById("finalScore");
     var btnSubmit = document.getElementById("btnSubmit");
     var txtInitials = document.getElementById("txtbox_Initials");
 
 
-
+    // Do some tidying up before showing the card
     finalScore.textContent = timeLeft;
     lHighScores.setAttribute("class", "nav-link");
     showCard("donePage");
 
-    // When user clicks on submit
-    var strInitials = btnSubmit.addEventListener("click", function () {
-        var value = txtInitials.value;
-        if (value === "") {
-            alert("Please enter you initials...\n I promise no one will judge you 😇")
+    // When user clicks on submit, record highscore and initials
+    btnSubmit.addEventListener("click", function () {
+        var initials = txtInitials.value;
+        if (initials === "") {
+            alert("Please enter you initials...\nI promise no one will judge you 😇")
+        }
+        else if (initials.length < 2) {
+            alert("Please enter at least 2 characters...")
         }
         else {
-            console.log(txtInitials.value);
+            // create user object from submission
+            var user = {
+                initials: txtInitials.value.trim(),
+                score: timeLeft,
+            };
+            console.log(user);
+
+            // Read local storage into array
+            aStorage = getLocalStorage();
+
+            // Push new object into array
+            aStorage = pushLocalStorage(aStorage, user);
+            console.log(aStorage);
+
+            // Set new submission to local storage 
+            setLocalStorage(aStorage);
+
+            // Go to highscore page
+            window.location.href = "./highscores.html";
+            highScorePage();
+
+
         }
+    });
+
+    function setLocalStorage(array) {
+        localStorage.setItem("scores", JSON.stringify(array));
+    }
+    // Push an object into an existing array; return the array back
+    function pushLocalStorage(array, object) {
+        array.push(object)
+        return array
+    }
+    // Retrieve the local storage data; if empty, return empty array
+    function getLocalStorage() {
+        var storageArray = [];
+        if (!JSON.parse(localStorage.getItem("scores"))) {
+            return storageArray;
+        }
+        else {
+            storageArray = JSON.parse(localStorage.getItem("scores"));
+            return storageArray;
+        }
+    }
 
 
-    })
-    // console.log(strInitials);
+    function highScorePage() {
 
-
+        var nvNavBar = document.getElementById("navvy");
+        nvNavBar.style = "display: none";
+    }
 
 
 
 }
-
-
 // Display Right or Wrong div based on value selected; timed
 function displayDivResult(result) {
     var resultText = document.getElementById("resultText");
@@ -171,7 +219,10 @@ function subtractTime(currentTimeLeft) {
 }
 // update global timeleft variable
 function updateTimeLeft(currentTimeLeft) {
-    stimeLeft.textContent = currentTimeLeft;
+    // If the element exists, b/c highscore
+    if (stimeLeft) {
+        stimeLeft.textContent = currentTimeLeft;
+    }
 }
 // Display answers
 function displayAnswers(array, index) {
@@ -208,7 +259,6 @@ function displayQuestion(array, index) {
     let question = array[index].question;
     document.getElementById("question").textContent = question;
 }
-
 // Quiz Timer countdown
 function countdown() {
     timeInterval = setInterval(function () {
@@ -224,7 +274,6 @@ function countdown() {
 
     }, 1000);
 }
-
 function getShuffledArray(array) {
     var newArray = [];
     for (let i = 0; i < array.length; i++) {
