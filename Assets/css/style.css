@@ -2,10 +2,10 @@
     text-align: center; 
 }
 
-#welcomePage, #donePage {
+#welcomePage, #donePage, #questionPage {
     border-style: none;
 }
 
-#questionPage, #donePage {
+#questionPage, #donePage, #divResult {
     display: none;
 }

@@ -24,8 +24,8 @@
     <!-- NAV BAR -->
     <nav class="navbar navbar-expand-md mb-4">
         <ul class="navbar-nav">
-            <li class="nav-item active">
-                <a class="nav-link" href="highscores.html">View Highscores</a>
+            <li class="nav-item">
+                <a id="linkhighScore" class="nav-link" href="highscores.html">View Highscores</a>
             </li>
         </ul>
 
@@ -77,12 +77,10 @@
                             class="btn btn-sm btn-primary d-block mb-1 pt-0 pb-0 qbtn">4.
                             <span id="a4"></span></button>
                     </div>
-                    
-                    <div id="divResult">
-                        <hr class="text-muted">
-                        <p class="card-subtitle text-muted mb-2 ms-0" id="resultText">Result</p>
-                    </div>
+
+
                 </div>
+
 
 
                 <!-- Done Page -->
@@ -92,13 +90,16 @@
                         </h5>
                         <p>Your final score is <span id="finalScore"></span></p>
                         <p>Enter initials:</p>
-                        <input class="form-text" placeholder="" id="txtbox_Initials" />
-                        <button id="submit" class="btn d-block mb-1 btn-sm btn-primary">Submit</button>
+                        <input class="form-text" id="txtbox_Initials" placeholder=""  />
+                        <button id="btnSubmit" class="btn d-block mb-1 btn-sm btn-primary">Submit</button>
 
                     </div>
                 </div>
 
-
+                <div id="divResult">
+                    <hr class=" text-muted">
+                    <p class="card-subtitle text-muted mb-2 ms-0" id="resultText">Result</p>
+                </div>
 
 
 

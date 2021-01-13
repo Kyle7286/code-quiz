@@ -53,6 +53,7 @@ var stopTime = false;
 var timeInterval;
 var answerValue;
 var stimeLeft = document.getElementById("timeLeft");
+var lHighScores = document.getElementById("linkhighScore");
 var timeLeft = 50;
 var finalScore;
 updateTimeLeft(timeLeft);
@@ -63,6 +64,7 @@ document.getElementById("startQuiz").addEventListener("click", startQuiz);
 // Main function that calls all sub functions
 function startQuiz() {
     aShuffQuestions = getShuffledArray(oQuestions);     // Shuffle the questions to ensure not the same order each run, returns a new array.
+    lHighScores.setAttribute("class", "nav-link disabled");
     countdown();
     hideCard("welcomePage");
     showCard("questionPage");
@@ -103,13 +105,47 @@ function startQuiz() {
             console.log("Reached the end!");
             clearInterval(timeInterval);
             hideCard("questionPage");
-            showCard("donePage");
+            donePage();
+
         }
     }
 
 
 }
 
+function donePage() {
+    var finalScore = document.getElementById("finalScore");
+    var btnSubmit = document.getElementById("btnSubmit");
+    var txtInitials = document.getElementById("txtbox_Initials");
+
+
+
+    finalScore.textContent = timeLeft;
+    lHighScores.setAttribute("class", "nav-link");
+    showCard("donePage");
+
+    // When user clicks on submit
+    var strInitials = btnSubmit.addEventListener("click", function () {
+        var value = txtInitials.value;
+        if (value === "") {
+            alert("Please enter you initials...\n I promise no one will judge you 😇")
+        }
+        else {
+            console.log(txtInitials.value);
+        }
+
+
+    })
+    // console.log(strInitials);
+
+
+
+
+
+}
+
+
+// Display Right or Wrong div based on value selected; timed
 function displayDivResult(result) {
     var resultText = document.getElementById("resultText");
     showCard("divResult")
@@ -126,22 +162,17 @@ function displayDivResult(result) {
         setTimeout(function () {
             hideCard("divResult")
         }, 850)
-
     }
-
 }
-
 // Subtract from time left
 function subtractTime(currentTimeLeft) {
     timeLeft = (currentTimeLeft - 10);
     stimeLeft.textContent = timeLeft;
 }
-
-
+// update global timeleft variable
 function updateTimeLeft(currentTimeLeft) {
     stimeLeft.textContent = currentTimeLeft;
 }
-
 // Display answers
 function displayAnswers(array, index) {
     // for the question object, set the button text to the answer value
@@ -178,16 +209,9 @@ function displayQuestion(array, index) {
     document.getElementById("question").textContent = question;
 }
 
-
-
 // Quiz Timer countdown
 function countdown() {
-    // stimeLeft.textContent = timeLeft--;
-
-
     timeInterval = setInterval(function () {
-
-        // stimeLeft.innerHTML = timeLeft;
 
         if (timeLeft <= 0) {
             stimeLeft.innerHTML = (timeLeft--);
@@ -201,21 +225,17 @@ function countdown() {
     }, 1000);
 }
 
-
-
 function getShuffledArray(array) {
     var newArray = [];
     for (let i = 0; i < array.length; i++) {
         newArray.push(array[i]);
     }
-
     for (var i = newArray.length - 1; i > 0; i--) {
         var j = Math.floor(Math.random() * (i + 1));
         var temp = newArray[i];
         newArray[i] = newArray[j];
         newArray[j] = temp;
     }
-
     return newArray
 }
 
