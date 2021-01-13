@@ -54,7 +54,7 @@ var timeInterval;
 var answerValue;
 var stimeLeft = document.getElementById("timeLeft");
 var lHighScores = document.getElementById("linkhighScore");
-var timeLeft = 50;
+var timeLeft = 45;
 var finalScore;
 updateTimeLeft(timeLeft);
 var scores = [];
@@ -156,7 +156,6 @@ function donePage() {
 
             // Go to highscore page
             window.location.href = "./highscores.html";
-            highScorePage();
 
 
         }
@@ -255,10 +254,14 @@ function displayQuestion(array, index) {
 function countdown() {
     timeInterval = setInterval(function () {
 
+        // If Time runs out... go to done page
         if (timeLeft <= 0) {
-            stimeLeft.innerHTML = (timeLeft--);
-            alert("OMG YOUR RAN OUT OF TIME!!!!!");
+
+            clearInterval(timeInterval);
+            hideCard("questionPage");
+            donePage();
             clearInterval(timeInterval)
+
         }
         else {
             stimeLeft.innerHTML = (timeLeft--);
