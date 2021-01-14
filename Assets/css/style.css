@@ -18,6 +18,7 @@
     /* padding:0; */
 }
 
+/* actually decreases the font size of the card title */
 #question {
     font-size: large;
 }
