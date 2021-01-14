@@ -91,7 +91,7 @@ function startQuiz() {
     document.querySelectorAll('.qbtn').forEach(item => {
         item.addEventListener('click', event => {
             //handle click
-            answerSelected(item, item.getAttribute("data-array"))
+            answerSelected(item, item.getAttribute("data-array"));
         })
     })
 
