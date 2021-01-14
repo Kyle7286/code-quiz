@@ -46,7 +46,7 @@ var oQuestions = [
         ],
     },
     {
-        question: "Which of these examples is properly folowing the \"camel case\" naming convention for variables?",
+        question: "Which of these examples is properly following the \"camel case\" naming convention for variables?",
         answers: [
             { "var myArray = [];": true },
             { "var MyArray = [];": false },
@@ -66,9 +66,7 @@ var lHighScores = document.getElementById("linkhighScore");
 var timeLeft = 65;
 var finalScore;
 updateTimeLeft(timeLeft);
-var scores = [];
-
-
+// var scores = [];
 
 // Start Quiz on click; call startQuiz Function
 if (document.getElementById("startQuiz")) {
