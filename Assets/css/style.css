@@ -2,17 +2,22 @@
     text-align: center; 
 }
 
+/* Remove borders from all cards */
 #welcomePage, #donePage, #questionPage, #highscoreCard {
     border-style: none;
 }
 
+/* Default display at the start */
 #questionPage, #donePage, #divResult {
     display: none;
 }
 
+/* To ensure the answer buttons align left */
 .qbtn {
     text-align: left;
     /* padding:0; */
 }
 
-
+#question {
+    font-size: large;
+}

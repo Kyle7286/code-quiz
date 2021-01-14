@@ -63,7 +63,7 @@ var timeInterval;
 var answerValue;
 var stimeLeft = document.getElementById("timeLeft");
 var lHighScores = document.getElementById("linkhighScore");
-var timeLeft = 50;
+var timeLeft = 65;
 var finalScore;
 updateTimeLeft(timeLeft);
 var scores = [];
@@ -85,7 +85,7 @@ function startQuiz() {
     answers = displayAnswers(aShuffQuestions, gindexer);      // Display current gindex questions' answer
     gindexer++;
 
-    // Answer button listener
+    // Answer button click listener
     document.querySelectorAll('.qbtn').forEach(item => {
         item.addEventListener('click', event => {
             //handle click
@@ -93,6 +93,9 @@ function startQuiz() {
         })
     })
 
+
+    var auHeart = new Audio('./assets/audio/OOT_Get_Heart.wav');
+    var auError = new Audio('./assets/audio/LTTP_Error.wav');
     // Handle the answer selections
     function answerSelected(buttonObj, buttonValue) {
         // Get value of answer
@@ -102,9 +105,11 @@ function startQuiz() {
         if (value === false) {
             subtractTime(timeLeft);
             displayDivResult(value);
+            auError.play();
         }
         else {
             displayDivResult(value);
+            auHeart.play();
         }
 
         // If the final question is answered then perform some functions and proceed to donePage
@@ -128,6 +133,9 @@ function donePage() {
     var finalScore = document.getElementById("finalScore");
     var btnSubmit = document.getElementById("btnSubmit");
     var txtInitials = document.getElementById("txtbox_Initials");
+    var auSmallItem = new Audio('./assets/audio/OOT_Fanfare_SmallItem.wav')
+
+    auSmallItem.play();
 
     // Do some tidying up before showing the card
     finalScore.textContent = timeLeft;
