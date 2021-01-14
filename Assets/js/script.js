@@ -68,6 +68,7 @@ var finalScore;
 updateTimeLeft(timeLeft);
 var scores = [];
 
+// Temp code; will remove later
 var audio = new Audio("http://noproblo.dayjo.org/ZeldaSounds/LOZ/LOZ_Sword_Slash.wav");
 document.getElementById("play").addEventListener("click", function (event) {
     console.log(event);
@@ -101,8 +102,8 @@ function startQuiz() {
     })
 
 
-    var auHeart = new Audio('./assets/audio/OOT_Get_Heart.mp3');
-    var auError = new Audio('./assets/audio/LTTP_Error.mp3');
+    var auHeart = new Audio('http://noproblo.dayjo.org/ZeldaSounds/OOT/OOT_Get_Heart.wav');
+    var auError = new Audio('http://noproblo.dayjo.org/ZeldaSounds/LTTP/LTTP_Error.wav');
     // Handle the answer selections
     function answerSelected(buttonObj, buttonValue) {
         // Get value of answer
