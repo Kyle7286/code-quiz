@@ -19,30 +19,39 @@ var oQuestions = [
         ],
     },
     {
-        question: "Food?",
+        question: "Which is an example of a javascript library?",
         answers: [
-            { "Sushi": true },
-            { "Pizza": false },
-            { "Hamburger": false },
-            { "Raman": false },
+            { "JQUERY": true },
+            { "CSS": false },
+            { "HTML": false },
+            { "OBJECT": false },
         ],
     },
     {
-        question: "Music?",
+        question: "Which of the below is true regarding CSS?",
         answers: [
-            { "Seven Lions": true },
-            { "Martin Garrix": false },
-            { "David Guetta": false },
-            { "Armin Van Buuren": false },
+            { "The styling in which was applied last will overwrite any similar styling before it.": true },
+            { "CSS is the platform in which a web page's logic is written.": false },
+            { "CSS is a library of Javascript in which extends its functionality.": false },
+            { "Validates your HTML code for syntax errors.": false },
         ],
     },
     {
-        question: "Car?",
+        question: "Which of the below is the proper syntax to concatenate strings \"Apple\" and \"pie\" together?",
         answers: [
-            { "Supra": true },
-            { "Porche": false },
-            { "Lambo": false },
-            { "Gensis": false },
+            { "var pie = \"Apple\" + \"Pie\";": true },
+            { "var pie = (Apple) ++ (Pie);": false },
+            { "var pie = Apple += Pie;": false },
+            { "var pie = Apple & Pie": false },
+        ],
+    },
+    {
+        question: "Which of these examples is properly folowing the \"camel case\" naming convention for variables?",
+        answers: [
+            { "var myArray = [];": true },
+            { "var MyArray = [];": false },
+            { "var myarray = [];": false },
+            { "var Myarray = [];": false },
         ],
     },
 ];
@@ -87,7 +96,10 @@ function startQuiz() {
     // Handle the answer selections
     function answerSelected(buttonValue) {
 
-        // If answer selected is false... subtract time
+        // Get value of answer
+        var value = getAnswerValue(answers, buttonValue);
+
+        // If answer selected is false... subtract time and display result div on a timer
         if (value === false) {
             subtractTime(timeLeft);
             displayDivResult(value);
@@ -104,11 +116,9 @@ function startQuiz() {
             return;
         }
 
-        var value = getAnswerValue(answers, buttonValue);
+
         displayQuestion(aShuffQuestions, gindexer);
         answers = displayAnswers(aShuffQuestions, gindexer);      // Display current gindex questions' answer
-
-
 
         gindexer++;
     }
@@ -119,7 +129,6 @@ function donePage() {
     var finalScore = document.getElementById("finalScore");
     var btnSubmit = document.getElementById("btnSubmit");
     var txtInitials = document.getElementById("txtbox_Initials");
-
 
     // Do some tidying up before showing the card
     finalScore.textContent = timeLeft;
@@ -155,8 +164,6 @@ function donePage() {
 
             // Go to highscore page
             window.location.href = "./highscores.html";
-
-
         }
     });
 
