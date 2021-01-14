@@ -94,8 +94,8 @@ function startQuiz() {
     })
 
 
-    var auHeart = new Audio('./assets/audio/OOT_Get_Heart.wav');
-    var auError = new Audio('./assets/audio/LTTP_Error.wav');
+    var auHeart = new Audio('./assets/audio/OOT_Get_Heart.mp3');
+    var auError = new Audio('./assets/audio/LTTP_Error.mp3');
     // Handle the answer selections
     function answerSelected(buttonObj, buttonValue) {
         // Get value of answer
@@ -133,7 +133,7 @@ function donePage() {
     var finalScore = document.getElementById("finalScore");
     var btnSubmit = document.getElementById("btnSubmit");
     var txtInitials = document.getElementById("txtbox_Initials");
-    var auSmallItem = new Audio('./assets/audio/OOT_Fanfare_SmallItem.wav')
+    var auSmallItem = new Audio('./assets/audio/OOT_Fanfare_SmallItem.mp3')
 
     auSmallItem.play();
 
