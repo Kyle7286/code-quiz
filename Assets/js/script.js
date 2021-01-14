@@ -1,21 +1,21 @@
 // Declare Question Object, with answer pool objects to be randomized for the quiz later
 var oQuestions = [
     {
-        question: "Color?",
+        question: "Variables defined inside a function are not accessible (visible) from _______ the function.",
         answers: [
-            { Green: true },
-            { Yellow: false },
-            { Blue: false },
-            { Red: false },
+            { outside: true },
+            { inside: false },
+            { beside: false },
+            { over: false },
         ],
     },
     {
-        question: "Number?",
+        question: "Which of the below is the proper syntax for generating a random integer between 1 to 10?",
         answers: [
-            { One: true },
-            { Two: false },
-            { Three: false },
-            { Four: false },
+            { "Math.floor(Math.random() * 10) + 1": true },
+            { "Math.random() * 10 + 1": false },
+            { "Math.floor(Math.random() * 1 ) + 10": false },
+            { "Math.random() * 5 + 2": false },
         ],
     },
     {
@@ -54,7 +54,7 @@ var timeInterval;
 var answerValue;
 var stimeLeft = document.getElementById("timeLeft");
 var lHighScores = document.getElementById("linkhighScore");
-var timeLeft = 45;
+var timeLeft = 50;
 var finalScore;
 updateTimeLeft(timeLeft);
 var scores = [];
@@ -71,32 +71,25 @@ function startQuiz() {
     countdown();
     hideCard("welcomePage");
     showCard("questionPage");
-    selectAnswer()
+
     displayQuestion(aShuffQuestions, gindexer);     // Display current gindex question
     answers = displayAnswers(aShuffQuestions, gindexer);      // Display current gindex questions' answer
+    gindexer++;
 
-
-    // Add event listeners for the buttons once quiz starts
-    function selectAnswer() {
-        document.querySelectorAll('.qbtn').forEach(item => {
-            item.addEventListener('click', event => {
-                //handle click
-                answerSelected(item.getAttribute("data-array"))
-            })
+    // Answer button listener
+    document.querySelectorAll('.qbtn').forEach(item => {
+        item.addEventListener('click', event => {
+            //handle click
+            answerSelected(item.getAttribute("data-array"))
         })
-    }
+    })
 
     // Handle the answer selections
     function answerSelected(buttonValue) {
-        console.log("Passed answerSelected(): " + buttonValue);
-        var value = getAnswerValue(answers, buttonValue);
-        displayQuestion(aShuffQuestions, gindexer);
-        answers = displayAnswers(aShuffQuestions, gindexer);      // Display current gindex questions' answer
 
         // If answer selected is false... subtract time
         if (value === false) {
             subtractTime(timeLeft);
-            console.log(value);
             displayDivResult(value);
         }
         else {
@@ -104,12 +97,20 @@ function startQuiz() {
         }
 
         // If the final question is answered then perform some functions and proceed to donePage
-        if (gindexer === oQuestions.length) {
-            console.log("Reached the end!");
+        if (gindexer >= 5) {
             clearInterval(timeInterval);
             hideCard("questionPage");
             donePage();
+            return;
         }
+
+        var value = getAnswerValue(answers, buttonValue);
+        displayQuestion(aShuffQuestions, gindexer);
+        answers = displayAnswers(aShuffQuestions, gindexer);      // Display current gindex questions' answer
+
+
+
+        gindexer++;
     }
 }
 
@@ -142,14 +143,12 @@ function donePage() {
                 initials: txtInitials.value.trim(),
                 score: timeLeft,
             };
-            console.log(user);
 
             // Read local storage into array
             aStorage = getLocalStorage();
 
             // Push new object into array
             aStorage = pushLocalStorage(aStorage, user);
-            console.log(aStorage);
 
             // Set new submission to local storage 
             setLocalStorage(aStorage);
@@ -186,7 +185,6 @@ function donePage() {
 }
 // Display Right or Wrong div based on value selected; timed
 function displayDivResult(result) {
-    console.log("ENTER DIV RESULT FUNCDTION")
     var resultText = document.getElementById("divResult");
     showCard("divResult")
 
@@ -198,7 +196,6 @@ function displayDivResult(result) {
     }
     else {
         resultText.textContent = "Correct!"
-        console.log("INSIDE WRONG DIV");
         resultText.textContent = "Correct!"
         setTimeout(function () {
             hideCard("divResult")
@@ -227,15 +224,12 @@ function displayAnswers(array, index) {
     document.getElementById("a3").textContent = (Object.keys(currentAnswers[2]));
     document.getElementById("a4").textContent = (Object.keys(currentAnswers[3]));
 
-    gindexer++;
-
     return currentAnswers; //return the array of answers on 
 }
 // Get the value of the button clicked (true or false)
 function getAnswerValue(array, index) {
     let j = Object.values(array[index])[0]
-    console.log(j);
-    return j
+    return j;
 }
 // Hide the element that's passed
 function hideCard(element) {
@@ -246,7 +240,6 @@ function hideCard(element) {
 function showCard(element) {
     let card = document.getElementById(element);
     card.style = "display: block";
-    console.log(document.getElementById("divResult"));
 }
 // Display question, increment question indexer
 function displayQuestion(array, index) {

@@ -1,4 +1,4 @@
-# Code Quiz
+# Code Quiz (Randomized)
 
 ## General 📖
 ---
