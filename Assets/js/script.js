@@ -66,7 +66,6 @@ var lHighScores = document.getElementById("linkhighScore");
 var timeLeft = 65;
 var finalScore;
 updateTimeLeft(timeLeft);
-// var scores = [];
 
 // Start Quiz on click; call startQuiz Function
 if (document.getElementById("startQuiz")) {

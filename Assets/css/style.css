@@ -1,3 +1,16 @@
+/* For beta; Ensure this is commented out before deploying to prod */
+body {
+    /* border-style: dashed;
+    border-color: red;
+    border-width: 8px;
+    padding: 10px; */
+}
+/* ^^^^^^^^^^^^^^^^^^^^^^  COMMENT THE ABOVE OUT BEFORE DEPLOYING */
+
+
+
+
+/* Center welcome page */
 #welcomePage {
     text-align: center; 
 }
@@ -22,3 +35,5 @@
 #question {
     font-size: large;
 }
+
+
