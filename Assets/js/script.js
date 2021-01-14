@@ -68,13 +68,7 @@ var finalScore;
 updateTimeLeft(timeLeft);
 var scores = [];
 
-// Temp code; will remove later
-var audio = new Audio("http://noproblo.dayjo.org/ZeldaSounds/LOZ/LOZ_Sword_Slash.wav");
-document.getElementById("play").addEventListener("click", function (event) {
-    console.log(event);
-    audio.play();
 
-})
 
 // Start Quiz on click; call startQuiz Function
 if (document.getElementById("startQuiz")) {
