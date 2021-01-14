@@ -141,7 +141,7 @@ function donePage() {
     var finalScore = document.getElementById("finalScore");
     var btnSubmit = document.getElementById("btnSubmit");
     var txtInitials = document.getElementById("txtbox_Initials");
-    var auSmallItem = new Audio('./assets/audio/OOT_Fanfare_SmallItem.mp3')
+    var auSmallItem = new Audio('http://noproblo.dayjo.org/ZeldaSounds/OOT/OOT_Fanfare_SmallItem.wav')
 
     auSmallItem.play();
 
