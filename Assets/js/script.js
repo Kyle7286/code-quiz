@@ -89,13 +89,12 @@ function startQuiz() {
     document.querySelectorAll('.qbtn').forEach(item => {
         item.addEventListener('click', event => {
             //handle click
-            answerSelected(item.getAttribute("data-array"))
+            answerSelected(item, item.getAttribute("data-array"))
         })
     })
 
     // Handle the answer selections
-    function answerSelected(buttonValue) {
-
+    function answerSelected(buttonObj, buttonValue) {
         // Get value of answer
         var value = getAnswerValue(answers, buttonValue);
 
@@ -109,7 +108,7 @@ function startQuiz() {
         }
 
         // If the final question is answered then perform some functions and proceed to donePage
-        if (gindexer >= 5) {
+        if (gindexer >= oQuestions.length) {
             clearInterval(timeInterval);
             hideCard("questionPage");
             donePage();
