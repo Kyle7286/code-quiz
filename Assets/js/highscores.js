@@ -1,11 +1,11 @@
-// Hide the navbar; inluding only for the spacing from prior page
+// Hide the navbar; indluding only for the spacing from prior page
 var navvy = document.getElementById("navvy");
 navvy.style.visibility = "hidden"
 
 // get local storage array
 var aStorage = getLocalStorage();
 
-// Sort the array descneding by score value
+// Sort the array descending by score value
 aStorage.sort(function (a, b) {
     return parseFloat(b.score) - parseFloat(a.score);
 });
@@ -19,7 +19,7 @@ for (let i = 0; i < aStorage.length; i++) {
     tableBody.appendChild(newRow)
 }
 
-// Create new table, append localstarge data and hand it back
+// Create new table, append localstorage data and hand it back
 function createTableRow(object) {
     // Grab the elements
     var initials = object.initials;
@@ -71,4 +71,5 @@ function getLocalStorage() {
         storageArray = JSON.parse(localStorage.getItem("scores"));
         return storageArray;
     }
+
 }

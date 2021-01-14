@@ -66,7 +66,7 @@ if (document.getElementById("startQuiz")) {
 
 // Main function that calls all sub functions
 function startQuiz() {
-    aShuffQuestions = getShuffledArray(oQuestions);     // Shuffle the questions to ensure not the same order each run, returns a new array.
+    aShuffQuestions = getShuffledArray(oQuestions);     // Shuffle the questions to ensure not the same order each run, returns a new array, shuffled.
     lHighScores.setAttribute("class", "nav-link disabled");
     countdown();
     hideCard("welcomePage");
