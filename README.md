@@ -11,7 +11,7 @@
 ## About/Purpose ❔
 ---
 
-The purpose of this webpage assignment was to create a timed quiz utilizing javascript to dynamically create elements on the page which keeps a local storage of your high scores and displays them on the page.
+The purpose of this webpage assignment was to create a timed quiz game in which subtracts time for incorrect answers and stores your initials and score to local storage. This quiz was designed to take in a dynamic amount of questions and run thru each.  The question order is randomly generated and the answers are shuffled so you cannot memorize where each correct answer is.
 
 
 ## Takeaways 🥡
@@ -27,6 +27,7 @@ The purpose of this webpage assignment was to create a timed quiz utilizing java
 * Learned how to add event listener to a class of buttons
 * Learned how to shuffle an array
 * Learned how to essentially create a randomized quiz with the answeres randomized as well which was possible due to the structure of the data object
+* Learned how to sort an array ascending/descending
 
 ## Screenshots/Gif 📊
 ---

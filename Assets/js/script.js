@@ -192,9 +192,6 @@ function donePage() {
             return storageArray;
         }
     }
-
-
-
 }
 // Display Right or Wrong div based on value selected; timed
 function displayDivResult(result) {
